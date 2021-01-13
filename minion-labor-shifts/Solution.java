@@ -5,19 +5,16 @@ import java.util.Map;
 
 public class Solution {
     public static int[] solution(int[] data, int n) {
-        Map<Integer, Integer> myMap = new HashMap<>();
-
-        for (int datum : data) {
-            Integer curr = myMap.getOrDefault(datum, 0);
-            myMap.put(datum, ++curr);
-        }
-
+        Map<Integer, Integer> frequencyMap = new HashMap<>();
         List<Integer> out = new ArrayList<>();
-        for (Integer elem : data) {
-            if (myMap.get(elem) <= n ) {
+
+        for (int datum : data)
+            frequencyMap.put(datum, frequencyMap.getOrDefault(datum, 0) + 1);
+
+        for (Integer elem : data)
+            if (frequencyMap.get(elem) <= n )
                 out.add(elem);
-            }
-        }
+
         return out.stream().mapToInt(Integer::intValue).toArray();
     }
 }
