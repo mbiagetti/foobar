@@ -1,0 +1,14 @@
+# IDE / editor files
+*.iml
+.idea/
+.idea_modules
+*.swp
+.vagrant
+
+# Ignore OSX stuff
+.DS_Store
+*/tags
+tags
+
+out
+*.class
