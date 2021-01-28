@@ -1,32 +1,26 @@
 public class Solution {
     public static int solution(int start, int length) {
-        int originLength = length;
-        int arrLength = (length * (length + 1)) / 2;
-        int[] el = new int[arrLength];
-        int idx = 0;
+        int out = xor(start + 2 * (length - 1));
+        out ^= xor(start - 1);
 
-        while (length > 0) {
-//            System.out.print("length ");
-  //          System.out.println(length);
-            for (int i = 0; i < length; i++) {
-                int x = start++;
-    //            System.out.println(x);
-                el[idx++] = x;
-            }
-            for (int j = 0; j < originLength - length; j++) {
-                start++;
-
-            }
-            length--;
+        for (int i = 0; i < (length - 2); i++) {
+            int elems = length - 2 - i;
+            int el = start + length * (2 + i) - 1;
+            out ^= xor(el + elems) ^ xor(el);
         }
-        return xorOfArray(el, arrLength);
+        return out;
     }
 
-    static int xorOfArray(int[] arr, int n) {
-        int xor_arr = 0;
-        for (int i = 0; i < n; i++) {
-            xor_arr = xor_arr ^ arr[i];
+    private static int xor(int n) {
+        switch (n % 4) {
+            case 0:
+                return n;
+            case 1:
+                return 1;
+            case 2:
+                return n + 1;
         }
-        return xor_arr;
+
+        return 0;
     }
 }
